@@ -37,7 +37,9 @@ function onReady(number) {
      //    $('.deleteButton').on('click', deleteFunction);
 
      // we say hey ul, future children with class deleteButton, attach code of deleteFunction to
-    $('#favFoods').on('click', ".deleteButton", deleteFunction)
+    $('#favFoods').on('click', ".deleteButton", deleteFunction);
+    // this sets the changeColor functionality to the Change Color button class
+    $('#favFoods').on('click', ".changeColor", changeColor );
 
 }   // end onReady fn
 
@@ -46,7 +48,12 @@ function buttonClicked() {
     // now when it's down here, all of the array items are added when the button is clicked.
     console.log('I was clicked');
     for (let i = 0; i < favFoods.length; i++) {
-        $('#favFoods').append(`<li> One of my favorite foods is ${favFoods[i]}! <button class="deleteButton">Delete</button> </li>`);
+        $('#favFoods').append(`
+            <li> One of my favorite foods is ${favFoods[i]}! 
+                <button class="deleteButton">Delete</button>
+                <button class="changeColor">Change Color</button> 
+            </li>
+        `);
     }   // end for
 
 }   // end buttonClicked fn
@@ -58,6 +65,16 @@ function deleteFunction() {
     // $(this).remove();
     // this line uses this functionality to remove the parent element, the list item, from the DOM
     $(this).parent().remove();
+}
+
+// fires when change Color button clicked
+function changeColor() {
+    console.log('color');
+    // going up to parent of button, which is the list item
+    // we added class to css file which is added to the item here
+    //$(this).parent().addClass('blueColor');
+
+    $(this).parent().toggleClass('blueColor');
 }
 
 // event #1 before it even gets to the document ready on line 3
