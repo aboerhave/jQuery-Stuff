@@ -1,6 +1,8 @@
 console.log('js');
 
 let favFoods = ['pizza', 'chicken', 'apples', 'mac and cheese'];
+let employees = [];
+let count = 0;
 
 // event #2
 $(document).ready(onReady);
@@ -41,12 +43,20 @@ function onReady(number) {
     // this sets the changeColor functionality to the Change Color button class
     $('#favFoods').on('click', ".changeColor", changeColor );
 
+    // form stuff
+    $('#submitForm').on('click', submitForm);
+
+    $('#counter').on('click', countUp);
+    $('#count').text(count);
+
 }   // end onReady fn
 
 function buttonClicked() {
 
     // now when it's down here, all of the array items are added when the button is clicked.
     console.log('I was clicked');
+    // to clear out element
+    $('#favFoods').empty();
     for (let i = 0; i < favFoods.length; i++) {
         $('#favFoods').append(`
             <li> One of my favorite foods is ${favFoods[i]}! 
@@ -75,6 +85,38 @@ function changeColor() {
     //$(this).parent().addClass('blueColor');
 
     $(this).parent().toggleClass('blueColor');
+}
+
+function submitForm() {
+    console.log('form submitted');
+    // want to grab values after submit clicked, not before
+    // getter called val
+    let name = $('#name').val();
+    console.log('name:', name);
+    //employees.push(name); we were just adding to employees array, but now it is an
+    // object so the whole object is pushed
+    let title = $('#title').val();
+    console.log('title', title);
+    //employees.push(title);
+    let object = {
+        employeeName: name,
+        employeeTitle: title
+    }
+    employees.push(object);
+    // setter also called .val('something') will put the stuff inside parentheses on dom
+    $('#name').val('');
+    $('#title').val('');
+
+}
+
+// want functionality to increment counter when the buton with id counter is clicked
+function countUp() {
+    console.log('countUp function');
+    // updating global variable.  No return needed
+    count++;
+    console.log(count);
+    $('#count').text(count);
+    
 }
 
 // event #1 before it even gets to the document ready on line 3
